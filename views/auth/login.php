@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="public/css/app.css">
 </head>
 <body class="m-0 p-0 overflow-hidden">
-    <div class="fixed inset-0 bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 z-[100] flex flex-col items-center justify-center p-6 text-white login-bg-pattern">
+    <div class="fixed inset-0 bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 z-[100] flex flex-col items-center justify-center p-6 text-white">
         
         <div class="w-full max-w-sm text-center space-y-6 bg-white/10 p-8 rounded-3xl backdrop-blur-md shadow-xl border border-white/20">
             <div>
