@@ -46,12 +46,20 @@
                 <select id="debetPilihNama" class="w-full p-3 border border-gray-200 rounded-xl bg-white font-semibold text-xs focus:outline-emerald-500"></select>
             </div>
 
-            <div id="blokKonsinyasi" class="hidden p-3.5 bg-gradient-to-br from-blue-50 to-indigo-50/30 rounded-2xl border border-blue-100">
+            <div id="blokKonsinyasi" class="hidden p-3.5 bg-gradient-to-br from-blue-50 to-indigo-50/30 rounded-2xl border border-blue-100 space-y-2">
                 <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Varian Pack (Pencatatan)</label>
                 <select id="konsinyasiVarian" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
                     <option value="Kerupuk 1k">Kerupuk Pack 1.000 (1k)</option>
                     <option value="Kerupuk 2k">Kerupuk Pack 2.000 (2k)</option>
+                    <option value="Kerupuk 5k">Kerupuk Pack 5.000 (5k)</option>
                 </select>
+                <div>
+                    <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Satuan</label>
+                    <select id="konsinyasiSatuan" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
+                        <option value="Pack">Pack</option>
+                        <option value="Pcs">Pcs</option>
+                    </select>
+                </div>
             </div>
 
             <div id="blokBayarLangsung" class="hidden p-3.5 bg-gradient-to-br from-emerald-50 to-teal-50/30 rounded-2xl border border-emerald-100 space-y-2">
@@ -77,12 +85,18 @@
             <div class="grid grid-cols-2 gap-3 p-3.5 bg-gray-50 rounded-2xl border border-gray-200">
                 <div>
                     <label class="block text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1 text-center">Jumlah (Qty)</label>
-                    <input type="number" id="debetQty" placeholder="0" required oninput="hitungTotalDebet()" class="w-full p-2.5 border border-gray-300 rounded-xl text-base font-black text-center focus:outline-amber-500">
+                    <input type="number" id="debetQty" placeholder="0" required step="any" oninput="hitungTotalDebet()" class="w-full p-2.5 border border-gray-300 rounded-xl text-base font-black text-center focus:outline-amber-500">
                 </div>
                 <div>
                     <label class="block text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1">Harga Satuan (Rp)</label>
                     <input type="text" id="debetHargaSatuan" placeholder="0" required oninput="formatInputRupiah(this); hitungTotalDebet()" class="w-full p-2.5 border border-gray-300 rounded-xl text-base font-black focus:outline-amber-500">
                 </div>
+            </div>
+
+            <!-- Ongkir -->
+            <div class="p-3.5 bg-amber-50/50 rounded-2xl border border-amber-200">
+                <label class="block text-[10px] font-black text-amber-700 uppercase tracking-wider mb-1">🚚 Ongkir / Biaya Kirim (Rp) <span class="text-gray-400 font-normal normal-case">— opsional</span></label>
+                <input type="text" id="debetOngkir" placeholder="0" oninput="formatInputRupiah(this); hitungTotalDebet()" class="w-full p-2.5 border border-amber-300 rounded-xl text-base font-black text-center focus:outline-amber-500">
             </div>
 
             <div class="grid grid-cols-5 gap-3 items-end">

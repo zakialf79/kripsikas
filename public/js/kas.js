@@ -66,7 +66,8 @@ function updateOpsiUnitLangsung() {
 function hitungTotalDebet() {
     let qty = cleanNumber(document.getElementById('debetQty').value);
     let harga = cleanRupiah(document.getElementById('debetHargaSatuan').value);
-    let total = qty * harga;
+    let ongkir = cleanRupiah(document.getElementById('debetOngkir') ? document.getElementById('debetOngkir').value : '0');
+    let total = (qty * harga) - ongkir;
     document.getElementById('debetTotalUangVisual').value = total > 0 ? total.toLocaleString('id-ID') : '';
 }
 
@@ -87,6 +88,7 @@ function simpanDebet(e) {
     const nama = document.getElementById('debetPilihNama').value || 'Tanpa Nama';
     const qty = cleanNumber(document.getElementById('debetQty').value);
     const harga = cleanRupiah(document.getElementById('debetHargaSatuan').value);
+    const ongkir = cleanRupiah(document.getElementById('debetOngkir') ? document.getElementById('debetOngkir').value : '0');
     const detail = document.getElementById('debetKeteranganTambahan').value.trim();
 
     if (qty * harga === 0) return alert('Qty dan Harga tidak boleh kosong!');
@@ -96,7 +98,8 @@ function simpanDebet(e) {
 
     if (metodePenjualan === 'Konsinyasi') {
         stokTarget = document.getElementById('konsinyasiVarian').value;
-        tipeCetak = stokTarget;
+        const satuanKonsinyasi = document.getElementById('konsinyasiSatuan') ? document.getElementById('konsinyasiSatuan').value : 'Pack';
+        tipeCetak = `${stokTarget} (${satuanKonsinyasi})`;
     } else {
         let kond = document.getElementById('langsungKondisi').value;
         let unit = document.getElementById('langsungUnit').value;
@@ -116,6 +119,7 @@ function simpanDebet(e) {
 
     let tag = metodePenjualan === 'Konsinyasi' ? '[Titip]' : '[Lsg]';
     let ketFinal = `${tag} ${nama} - ${qty} ${tipeCetak} [${metodeBayar}]`;
+    if (ongkir > 0) ketFinal += ` (Potong Ongkir: ${ongkir.toLocaleString('id-ID')})`;
     if (detail) ketFinal += ` (${detail})`;
 
     globalState.listBukuKas.push({
@@ -123,7 +127,7 @@ function simpanDebet(e) {
         tglSort: tglRaw,
         tgl: tglVisual,
         ket: ketFinal,
-        debet: qty * harga,
+        debet: (qty * harga) - ongkir,
         kredit: 0
     });
 
@@ -149,6 +153,16 @@ function gantiKategoriKredit() {
     }
 }
 
+function togglePlastikCustom() {
+    const val = document.getElementById('kreditUkuranPlastik').value;
+    const wrapper = document.getElementById('wrapperPlastikCustom');
+    if (val === '__custom__') {
+        wrapper.classList.remove('hidden');
+    } else {
+        wrapper.classList.add('hidden');
+    }
+}
+
 function simpanKredit(e) {
     e.preventDefault();
     
@@ -166,9 +180,17 @@ function simpanKredit(e) {
     if (nominal === 0) return alert('Nominal tidak boleh kosong!');
 
     let namaBrg = kat === 'Plastik' ? document.getElementById('kreditUkuranPlastik').value : kat;
+    if (namaBrg === '__custom__') {
+        namaBrg = document.getElementById('kreditPlastikCustom').value.trim();
+        if (!namaBrg) return alert('Nama plastik baru wajib diisi!');
+    }
+    
     let logGudangText = '';
 
-    if (kat !== 'Lainnya' && vol > 0 && globalState.databaseStok[namaBrg] !== undefined) {
+    if (kat !== 'Lainnya' && vol > 0) {
+        if (globalState.databaseStok[namaBrg] === undefined) {
+            globalState.databaseStok[namaBrg] = 0; // Initialize new custom plastic
+        }
         globalState.databaseStok[namaBrg] += vol;
         logGudangText = `📥 Masuk Bahan Belanja: ${namaBrg} +${vol}${satuan}`;
     }

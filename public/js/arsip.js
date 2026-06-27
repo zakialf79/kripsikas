@@ -42,10 +42,19 @@ async function downloadCSVData(bulanKunci) {
 }
 
 function generateCSV(dataArray, filename) {
-    let csvContent = 'data:text/csv;charset=utf-8,Tanggal,Keterangan,Debet (Masuk),Kredit (Keluar)\n';
+    let csvContent = 'data:text/csv;charset=utf-8,\uFEFFTanggal,Keterangan,Debet (Masuk),Kredit (Keluar),Saldo\n';
+    let runningSaldo = 0;
+    let totalDebet = 0;
+    let totalKredit = 0;
     dataArray.forEach(row => {
-        csvContent += `"${row.tgl}","${row.ket}",${row.debet},${row.kredit}\n`;
+        let debet = parseInt(row.debet) || 0;
+        let kredit = parseInt(row.kredit) || 0;
+        runningSaldo += (debet - kredit);
+        totalDebet += debet;
+        totalKredit += kredit;
+        csvContent += `"${row.tgl}","${row.ket}",${debet},${kredit},${runningSaldo}\n`;
     });
+    csvContent += `"","TOTAL",${totalDebet},${totalKredit},${runningSaldo}\n`;
 
     const encodedUri = encodeURI(csvContent);
     const link = document.createElement('a');
@@ -89,7 +98,7 @@ async function downloadPDFData(bulanKunci) {
         divBayangan.style.fontFamily = 'sans-serif';
 
         let htmlContent = `
-            <div style="text-align:center; padding-bottom:15px; border-b:2px solid #000; margin-bottom:15px;">
+            <div style="text-align:center; padding-bottom:15px; border-bottom:2px solid #000; margin-bottom:15px;">
                 <h2 style="margin:0; text-transform:uppercase;">Laporan Buku Kas Bulan ${bulanKunci}</h2>
                 <p style="margin:4px 0 0 0; font-size:12px; color:#555;">Arsip Data Finansial — KrispiKas UMKM Digital</p>
             </div>
@@ -100,18 +109,35 @@ async function downloadPDFData(bulanKunci) {
                         <th style="padding:8px; border:1px solid #ddd;">Keterangan</th>
                         <th style="padding:8px; border:1px solid #ddd; text-align:right;">Debet (Rp)</th>
                         <th style="padding:8px; border:1px solid #ddd; text-align:right;">Kredit (Rp)</th>
+                        <th style="padding:8px; border:1px solid #ddd; text-align:right;">Saldo (Rp)</th>
                     </tr>
                 </thead>
                 <tbody>`;
 
+        let runningSaldo = 0;
+        let totalDebet = 0;
+        let totalKredit = 0;
         targetData.forEach(row => {
+            let dbt = parseInt(row.debet) || 0;
+            let krd = parseInt(row.kredit) || 0;
+            runningSaldo += (dbt - krd);
+            totalDebet += dbt;
+            totalKredit += krd;
             htmlContent += `<tr style="border-bottom:1px solid #eee;">
                 <td style="padding:7px; border:1px solid #ddd; text-align:center;">${row.tgl}</td>
                 <td style="padding:7px; border:1px solid #ddd; font-weight:bold;">${row.ket}</td>
-                <td style="padding:7px; border:1px solid #ddd; text-align:right; color:green;">${parseInt(row.debet) > 0 ? parseInt(row.debet).toLocaleString('id-ID') : ''}</td>
-                <td style="padding:7px; border:1px solid #ddd; text-align:right; color:red;">${parseInt(row.kredit) > 0 ? parseInt(row.kredit).toLocaleString('id-ID') : ''}</td>
+                <td style="padding:7px; border:1px solid #ddd; text-align:right; color:green;">${dbt > 0 ? dbt.toLocaleString('id-ID') : ''}</td>
+                <td style="padding:7px; border:1px solid #ddd; text-align:right; color:red;">${krd > 0 ? krd.toLocaleString('id-ID') : ''}</td>
+                <td style="padding:7px; border:1px solid #ddd; text-align:right; font-weight:bold;">${runningSaldo.toLocaleString('id-ID')}</td>
             </tr>`;
         });
+        
+        htmlContent += `<tr style="background-color:#fef3c7; border-top:2px solid #d97706; font-weight:bold;">
+            <td colspan="2" style="padding:8px; border:1px solid #ddd; text-align:right;">TOTAL:</td>
+            <td style="padding:8px; border:1px solid #ddd; text-align:right; color:green;">${totalDebet.toLocaleString('id-ID')}</td>
+            <td style="padding:8px; border:1px solid #ddd; text-align:right; color:red;">${totalKredit.toLocaleString('id-ID')}</td>
+            <td style="padding:8px; border:1px solid #ddd; text-align:right;">${runningSaldo.toLocaleString('id-ID')}</td>
+        </tr>`;
 
         htmlContent += '</tbody></table>';
         divBayangan.innerHTML = htmlContent;

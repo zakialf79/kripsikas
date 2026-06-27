@@ -36,7 +36,7 @@ function simpanProduksi(e) {
 
     closeModal('modalGudang');
 
-    kirimStateKeMySQL(`🔥 Proses Masak: Keluar Kulit ${bKeluar}Kg, Gas ${gKeluar}Tbg, Minyak ${mKeluar}L`);
+    kirimStateKeMySQL(`🔥 Proses Masak: Keluar Kulit ${bKeluar}Kg, Gas ${gKeluar}Tbg, Minyak ${mKeluar}Kg`);
 }
 
 // ============================================
@@ -69,7 +69,7 @@ function updateVisualStok() {
     // Render daftar lengkap stok di modal gudang
     let htmlList = '';
     for (const [barang, qty] of Object.entries(globalState.databaseStok)) {
-        let satuan = (barang === 'Minyak') ? 'L' : (barang === 'Gas' ? 'Tbg' : (barang.includes('Plastik') || barang.includes('Ziplock') ? 'Pack' : 'Kg'));
+        let satuan = (barang === 'Gas') ? 'Tbg' : 'Kg';
         htmlList += `<div class="flex justify-between items-center bg-gray-50 p-2.5 rounded-xl border border-gray-200">
             <span class="font-semibold text-gray-800">${barang}</span>
             <div class="flex items-center gap-3">

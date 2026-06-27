@@ -23,25 +23,27 @@
                 </div>
             </div>
             
-            <div id="wrapperUkuranPlastik" class="hidden">
+            <div id="wrapperUkuranPlastik" class="hidden space-y-2">
                 <label class="block text-[11px] font-bold text-gray-500 mb-1">Pilih Ukuran Plastik</label>
-                <select id="kreditUkuranPlastik" class="w-full p-3 border border-gray-200 rounded-xl bg-white font-medium text-xs">
+                <select id="kreditUkuranPlastik" onchange="togglePlastikCustom()" class="w-full p-3 border border-gray-200 rounded-xl bg-white font-medium text-xs">
                     <option value="Plastik 9x16">9 × 16</option>
                     <option value="Plastik 8x13">8 × 13</option>
                     <option value="Plastik 35x55">35 × 55</option>
                     <option value="Ziplock 20x29">Ziplock 20 × 29</option>
+                    <option value="__custom__">➕ Tambah Jenis Lainnya...</option>
                 </select>
+                <div id="wrapperPlastikCustom" class="hidden">
+                    <input type="text" id="kreditPlastikCustom" placeholder="Ketik nama jenis plastik baru..." class="w-full p-2.5 border border-purple-300 rounded-xl bg-purple-50 text-xs font-bold focus:outline-purple-500">
+                </div>
             </div>
 
             <div class="p-4 bg-red-50 rounded-2xl border border-red-100">
                 <label class="block text-[10px] font-black text-red-800 uppercase tracking-wider mb-1">Volume Dibeli (Masuk Gudang)</label>
                 <div class="flex gap-2 items-center">
-                    <input type="number" id="kreditVolumeBeli" placeholder="0" class="flex-1 p-2.5 border border-gray-200 bg-white rounded-xl text-xs font-bold text-center focus:outline-red-500">
+                    <input type="number" id="kreditVolumeBeli" placeholder="0" step="any" class="flex-1 p-2.5 border border-gray-200 bg-white rounded-xl text-xs font-bold text-center focus:outline-red-500">
                     <select id="kreditSatuanBeli" class="p-2.5 border border-gray-200 rounded-xl text-xs font-bold text-gray-600 bg-white focus:outline-red-500">
                         <option value="Kg">Kg</option>
-                        <option value="Liter">Liter (L)</option>
                         <option value="Tabung">Tabung</option>
-                        <option value="Pack">Pack</option>
                     </select>
                 </div>
             </div>

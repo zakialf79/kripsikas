@@ -30,7 +30,7 @@
         </div>
         <div class="bg-gradient-to-br from-teal-50 to-teal-100/50 p-3 rounded-2xl border border-teal-100/40">
             <p class="text-teal-600 text-[10px] mb-0.5">Minyak Goreng</p>
-            <span id="stokMinyak" class="text-lg font-black text-teal-900 num-transition">0</span> <span class="text-gray-500 font-normal">L</span>
+            <span id="stokMinyak" class="text-lg font-black text-teal-900 num-transition">0</span> <span class="text-gray-500 font-normal">Kg</span>
         </div>
         <div class="bg-gradient-to-br from-orange-50 to-amber-100/50 p-3 rounded-2xl border border-amber-100/40">
             <p class="text-orange-600 text-[10px] mb-0.5">Gas Tabung</p>

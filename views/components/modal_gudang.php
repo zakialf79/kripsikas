@@ -13,15 +13,15 @@
                 <div class="grid grid-cols-3 gap-2">
                     <div>
                         <label class="block text-[9px] font-black text-gray-500 uppercase tracking-wider mb-1 text-center">Mentah</label>
-                        <input type="number" id="prodBahanKeluar" placeholder="Kg" class="w-full p-2 border border-indigo-200 rounded-xl bg-white text-xs font-bold text-center focus:outline-indigo-500">
+                        <input type="number" id="prodBahanKeluar" placeholder="Kg" step="any" class="w-full p-2 border border-indigo-200 rounded-xl bg-white text-xs font-bold text-center focus:outline-indigo-500">
                     </div>
                     <div>
                         <label class="block text-[9px] font-black text-gray-500 uppercase tracking-wider mb-1 text-center">Gas</label>
-                        <input type="number" id="prodGasKeluar" placeholder="Tbg" class="w-full p-2 border border-indigo-200 rounded-xl bg-white text-xs font-bold text-center focus:outline-indigo-500">
+                        <input type="number" id="prodGasKeluar" placeholder="Tbg" step="any" class="w-full p-2 border border-indigo-200 rounded-xl bg-white text-xs font-bold text-center focus:outline-indigo-500">
                     </div>
                     <div>
                         <label class="block text-[9px] font-black text-gray-500 uppercase tracking-wider mb-1 text-center">Minyak</label>
-                        <input type="number" id="prodMinyakKeluar" placeholder="Liter" class="w-full p-2 border border-indigo-200 rounded-xl bg-white text-xs font-bold text-center focus:outline-indigo-500">
+                        <input type="number" id="prodMinyakKeluar" placeholder="Kg" step="any" class="w-full p-2 border border-indigo-200 rounded-xl bg-white text-xs font-bold text-center focus:outline-indigo-500">
                     </div>
                 </div>
                 <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 text-xs font-black rounded-xl cursor-pointer shadow transition-all tracking-wider uppercase btn-press">SIMPAN PEMAKAIAN BAHAN</button>
@@ -39,7 +39,7 @@
                     </div>
                     <div class="bg-white/5 p-2 rounded-xl border border-white/5">
                         <p class="text-[9px] text-gray-400 font-bold uppercase tracking-wider mb-0.5">Minyak</p>
-                        <p class="text-base font-black text-teal-400"><span id="totalPakaiMinyak">0</span> <span class="text-[9px] text-gray-300 font-normal">L</span></p>
+                        <p class="text-base font-black text-teal-400"><span id="totalPakaiMinyak">0</span> <span class="text-[9px] text-gray-300 font-normal">Kg</span></p>
                     </div>
                     <div class="bg-white/5 p-2 rounded-xl border border-white/5">
                         <p class="text-[9px] text-gray-400 font-bold uppercase tracking-wider mb-0.5">Gas</p>

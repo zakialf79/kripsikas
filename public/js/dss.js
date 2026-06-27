@@ -101,7 +101,7 @@ function bukaStatistikDSS() {
             const chartBahan = new Chart(ctxBahan, {
                 type: 'bar',
                 data: {
-                    labels: ['Kulit (Kg)', 'Minyak (L)', 'Gas (Tbg)'],
+                    labels: ['Kulit (Kg)', 'Minyak (Kg)', 'Gas (Tbg)'],
                     datasets: [{
                         label: 'Total Terpakai',
                         data: [
@@ -131,7 +131,7 @@ function bukaStatistikDSS() {
         if (mentah <= 15) {
             textAIBahan += '⚠️ ALERT: Sisa stok mentah gudang kritis (≤ 15Kg). Segera order ke supplier!';
         } else if (minyak <= 5) {
-            textAIBahan += '⚠️ ALERT: Stok minyak goreng menipis (≤ 5L).';
+            textAIBahan += '⚠️ ALERT: Stok minyak goreng menipis (≤ 5Kg).';
         } else {
             textAIBahan += '✅ Sisa stok di gudang masih dalam batas aman untuk produksi harian.';
         }
