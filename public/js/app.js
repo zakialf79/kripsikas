@@ -25,6 +25,7 @@ let arrChartsGlobal = [];
 // INISIALISASI APLIKASI
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
+    loadSettings();
     loadDataDariMySQL();
 });
 
@@ -132,4 +133,46 @@ async function prosesLogout() {
         // Ignore error
     }
     window.location.href = 'index.php';
+}
+
+// ============================================
+// PENGATURAN TAMPILAN (TEMA & TEKS)
+// ============================================
+function loadSettings() {
+    const isDark = localStorage.getItem('krispikas_dark_mode') === 'true';
+    const isLarge = localStorage.getItem('krispikas_large_text') === 'true';
+
+    const toggleDark = document.getElementById('toggleDarkMode');
+    const toggleLarge = document.getElementById('toggleLargeText');
+
+    if (isDark) {
+        document.documentElement.classList.add('dark');
+        if (toggleDark) toggleDark.checked = true;
+    }
+    if (isLarge) {
+        document.documentElement.classList.add('teks-besar');
+        if (toggleLarge) toggleLarge.checked = true;
+    }
+}
+
+function toggleTheme() {
+    const toggle = document.getElementById('toggleDarkMode');
+    if (toggle.checked) {
+        document.documentElement.classList.add('dark');
+        localStorage.setItem('krispikas_dark_mode', 'true');
+    } else {
+        document.documentElement.classList.remove('dark');
+        localStorage.setItem('krispikas_dark_mode', 'false');
+    }
+}
+
+function toggleLargeText() {
+    const toggle = document.getElementById('toggleLargeText');
+    if (toggle.checked) {
+        document.documentElement.classList.add('teks-besar');
+        localStorage.setItem('krispikas_large_text', 'true');
+    } else {
+        document.documentElement.classList.remove('teks-besar');
+        localStorage.setItem('krispikas_large_text', 'false');
+    }
 }

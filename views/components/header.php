@@ -4,5 +4,8 @@
         <h1 class="text-base font-black tracking-wide">KrispiKas 🍘</h1>
         <p class="text-[10px] text-amber-100" id="visualBulan">Periode Catatan</p>
     </div>
-    <button type="button" onclick="prosesLogout()" class="bg-amber-800/80 hover:bg-amber-900 text-xs px-3 py-2 rounded-xl font-bold cursor-pointer transition-all shadow btn-press">Keluar 🚪</button>
+    <div class="flex gap-2">
+        <button type="button" onclick="openModal('modalSettings')" class="bg-amber-800/80 hover:bg-amber-900 text-xs px-3 py-2 rounded-xl font-bold cursor-pointer transition-all shadow btn-press" title="Pengaturan Tampilan">⚙️</button>
+        <button type="button" onclick="prosesLogout()" class="bg-amber-800/80 hover:bg-amber-900 text-xs px-3 py-2 rounded-xl font-bold cursor-pointer transition-all shadow btn-press">Keluar 🚪</button>
+    </div>
 </header>

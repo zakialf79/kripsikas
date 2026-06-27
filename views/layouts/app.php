@@ -26,6 +26,7 @@
     <?php require_once __DIR__ . '/../components/modal_arsip.php'; ?>
     <?php require_once __DIR__ . '/../components/modal_dss.php'; ?>
     <?php require_once __DIR__ . '/../components/modal_confirm.php'; ?>
+    <?php require_once __DIR__ . '/../components/modal_settings.php'; ?>
 
     <!-- Toast Notification Container -->
     <div id="toastContainer" class="toast">
