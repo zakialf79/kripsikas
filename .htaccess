@@ -1,0 +1,13 @@
+DirectoryIndex index.php
+Options -Indexes
+
+# Mencegah akses langsung ke file konfigurasi
+<FilesMatch "^(config|models|controllers|middleware|views)">
+    Deny from all
+</FilesMatch>
+
+# Mengizinkan akses ke folder public
+<IfModule mod_rewrite.c>
+    RewriteEngine On
+    RewriteRule ^public/ - [L]
+</IfModule>
