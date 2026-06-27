@@ -1,8 +1,7 @@
 <?php
-require_once __DIR__ . '/config/database.php';
 
 try {
-    $config = require __DIR__ . '/config/database.php';
+    $config = require_once __DIR__ . '/config/database.php';
     $dsn = "mysql:host={$config['host']};port={$config['port']};dbname={$config['db_name']};charset={$config['charset']}";
     $conn = new PDO($dsn, $config['username'], $config['password']);
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
