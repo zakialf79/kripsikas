@@ -11,8 +11,8 @@
             <button type="button" onclick="lanjutFormDebet('Konsinyasi')" class="w-full bg-gradient-to-r from-blue-50 to-blue-100/50 border border-blue-200 p-4 rounded-2xl text-left cursor-pointer active:scale-95 transition-transform btn-press">
                 <p class="font-black text-blue-800 text-base">🤝 Titip / Konsinyasi</p>
             </button>
-            <button type="button" onclick="lanjutFormDebet('Bayar Langsung')" class="w-full bg-gradient-to-r from-emerald-50 to-emerald-100/50 border border-emerald-200 p-4 rounded-2xl text-left cursor-pointer active:scale-95 transition-transform btn-press">
-                <p class="font-black text-emerald-800 text-base">💵 Bayar Langsung</p>
+            <button type="button" onclick="lanjutFormDebet('Pembayaran Tunai')" class="w-full bg-gradient-to-r from-emerald-50 to-emerald-100/50 border border-emerald-200 p-4 rounded-2xl text-left cursor-pointer active:scale-95 transition-transform btn-press">
+                <p class="font-black text-emerald-800 text-base">💵 Pembayaran Tunai</p>
             </button>
         </div>
     </div>
@@ -49,17 +49,10 @@
             <div id="blokKonsinyasi" class="hidden p-3.5 bg-gradient-to-br from-blue-50 to-indigo-50/30 rounded-2xl border border-blue-100 space-y-2">
                 <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Varian Pack (Pencatatan)</label>
                 <select id="konsinyasiVarian" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
-                    <option value="Kerupuk 1k">Kerupuk Pack 1.000 (1k)</option>
-                    <option value="Kerupuk 2k">Kerupuk Pack 2.000 (2k)</option>
-                    <option value="Kerupuk 5k">Kerupuk Pack 5.000 (5k)</option>
+                    <option value="Kerupuk 1.000">Kerupuk 1.000</option>
+                    <option value="Kerupuk 2.000">Kerupuk 2.000</option>
+                    <option value="Kerupuk 5.000">Kerupuk 5.000</option>
                 </select>
-                <div>
-                    <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Satuan</label>
-                    <select id="konsinyasiSatuan" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
-                        <option value="Pack">Pack</option>
-                        <option value="Pcs">Pcs</option>
-                    </select>
-                </div>
             </div>
 
             <div id="blokBayarLangsung" class="hidden p-3.5 bg-gradient-to-br from-emerald-50 to-teal-50/30 rounded-2xl border border-emerald-100 space-y-2">
@@ -94,7 +87,7 @@
             </div>
 
             <!-- Ongkir -->
-            <div class="p-3.5 bg-amber-50/50 rounded-2xl border border-amber-200">
+            <div id="wrapperDebetOngkir" class="p-3.5 bg-amber-50/50 rounded-2xl border border-amber-200">
                 <label class="block text-[10px] font-black text-amber-700 uppercase tracking-wider mb-1">🚚 Ongkir / Biaya Kirim (Rp) <span class="text-gray-400 font-normal normal-case">— opsional</span></label>
                 <input type="text" id="debetOngkir" placeholder="0" oninput="formatInputRupiah(this); hitungTotalDebet()" class="w-full p-2.5 border border-amber-300 rounded-xl text-base font-black text-center focus:outline-amber-500">
             </div>

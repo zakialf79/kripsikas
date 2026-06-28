@@ -50,7 +50,10 @@
 
             <!-- Daftar Stok Gudang -->
             <div>
-                <h4 class="font-black text-xs text-gray-700 uppercase tracking-wider mb-2 border-b border-gray-100 pb-1 flex items-center gap-1"><span>📋</span> Sisa Bahan Baku Gudang</h4>
+                <div class="flex justify-between items-center mb-2 border-b border-gray-100 pb-1">
+                    <h4 class="font-black text-xs text-gray-700 uppercase tracking-wider flex items-center gap-1"><span>📋</span> Sisa Bahan Baku Gudang</h4>
+                    <button type="button" onclick="tambahJenisBahanBaku()" class="bg-indigo-600 hover:bg-indigo-700 text-white text-[10px] font-black px-2.5 py-1 rounded-xl shadow cursor-pointer btn-press">tambah +</button>
+                </div>
                 <div id="listStokLengkap" class="space-y-1.5 text-xs max-h-32 overflow-y-auto"></div>
             </div>
 

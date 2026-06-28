@@ -15,9 +15,9 @@
                 </form>
                 <div id="listAgenKonVisual" class="space-y-1.5 max-h-32 overflow-y-auto text-xs bg-white p-2 rounded-xl border border-blue-100/60"></div>
             </div>
-            <!-- Langsung -->
+            <!-- Langsung / Tunai -->
             <div class="bg-gradient-to-br from-emerald-50 to-teal-50/40 p-4 rounded-2xl border border-emerald-100">
-                <h4 class="font-black text-xs text-emerald-800 uppercase tracking-wider mb-2">💵 Pelanggan Langsung (Hotel/RM/Personal)</h4>
+                <h4 class="font-black text-xs text-emerald-800 uppercase tracking-wider mb-2">💵 Pelanggan Tunai (Hotel/RM/Personal)</h4>
                 <form onsubmit="tambahAgen(event, 'lsg')" class="flex gap-2 mb-2">
                     <input type="text" id="inputNamaLsg" required placeholder="Nama pelanggan baru..." class="flex-1 p-2.5 bg-white border border-emerald-200 rounded-xl text-xs focus:outline-emerald-500">
                     <button type="submit" class="bg-emerald-600 text-white px-4 font-bold rounded-xl text-xs cursor-pointer hover:bg-emerald-700 btn-press">Tambah</button>

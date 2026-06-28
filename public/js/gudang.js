@@ -40,6 +40,23 @@ function simpanProduksi(e) {
 }
 
 // ============================================
+// TAMBAH JENIS BAHAN BAKU BARU
+// ============================================
+
+async function tambahJenisBahanBaku() {
+    const namaBaku = await customPrompt('Masukkan nama jenis plastik / bahan baku baru:');
+    if (!namaBaku || !namaBaku.trim()) return;
+
+    const cleanNama = namaBaku.trim();
+    if (globalState.databaseStok[cleanNama] !== undefined) {
+        return showToast(`Bahan baku "${cleanNama}" sudah ada!`, '⚠️');
+    }
+
+    globalState.databaseStok[cleanNama] = 0;
+    kirimStateKeMySQL(`➕ Tambah Bahan Baku Baru: ${cleanNama}`);
+}
+
+// ============================================
 // EDIT STOK MANUAL
 // ============================================
 
@@ -66,8 +83,10 @@ function updateVisualStok() {
     document.getElementById('totalPakaiMinyak').innerText = globalState.akumulasiPakai.minyak;
     document.getElementById('totalPakaiGas').innerText = globalState.akumulasiPakai.gas;
 
-    // Render daftar lengkap stok di modal gudang
+    // Render daftar lengkap stok di modal gudang & siapkan opsi plastik
     let htmlList = '';
+    let opsiPlastik = '';
+
     for (const [barang, qty] of Object.entries(globalState.databaseStok)) {
         let satuan = (barang === 'Gas') ? 'Tbg' : 'Kg';
         htmlList += `<div class="flex justify-between items-center bg-gray-50 p-2.5 rounded-xl border border-gray-200">
@@ -77,8 +96,19 @@ function updateVisualStok() {
                 <button type="button" onclick="editManualStok('${barang}')" class="text-[9px] bg-white border border-gray-300 px-2.5 py-1.5 rounded-xl shadow-sm cursor-pointer btn-press">Edit</button>
             </div>
         </div>`;
+
+        if (barang !== 'Kulit Mentah' && barang !== 'Minyak' && barang !== 'Gas') {
+            opsiPlastik += `<option value="${barang}">${barang}</option>`;
+        }
     }
     document.getElementById('listStokLengkap').innerHTML = htmlList;
+
+    // Update dropdown kredit ukuran plastik jika element ada
+    const selectPlastik = document.getElementById('kreditUkuranPlastik');
+    if (selectPlastik) {
+        opsiPlastik += `<option value="__custom__">➕ Tambah Jenis Lainnya...</option>`;
+        selectPlastik.innerHTML = opsiPlastik;
+    }
 
     // Render histori gudang
     let htmlHistori = '';

@@ -42,23 +42,36 @@ async function downloadCSVData(bulanKunci) {
 }
 
 function generateCSV(dataArray, filename) {
-    let csvContent = 'data:text/csv;charset=utf-8,\uFEFFTanggal,Keterangan,Debet (Masuk),Kredit (Keluar),Saldo\n';
+    let csvRows = [];
+    csvRows.push(['Tanggal', 'Keterangan', 'Debet (Masuk)', 'Kredit (Keluar)', 'Saldo']);
+
     let runningSaldo = 0;
     let totalDebet = 0;
     let totalKredit = 0;
+
     dataArray.forEach(row => {
-        let debet = parseInt(row.debet) || 0;
-        let kredit = parseInt(row.kredit) || 0;
+        let debet = parseFloat(row.debet) || 0;
+        let kredit = parseFloat(row.kredit) || 0;
         runningSaldo += (debet - kredit);
         totalDebet += debet;
         totalKredit += kredit;
-        csvContent += `"${row.tgl}","${row.ket}",${debet},${kredit},${runningSaldo}\n`;
-    });
-    csvContent += `"","TOTAL",${totalDebet},${totalKredit},${runningSaldo}\n`;
 
-    const encodedUri = encodeURI(csvContent);
-    const link = document.createElement('a');
-    link.setAttribute('href', encodedUri);
+        csvRows.push([
+            `"${row.tgl || ''}"`,
+            `"${(row.ket || '').replace(/"/g, '""')}"`,
+            debet,
+            kredit,
+            runningSaldo
+        ]);
+    });
+
+    csvRows.push(['""', '"TOTAL"', totalDebet, totalKredit, runningSaldo]);
+
+    let csvString = '\uFEFF' + csvRows.map(e => e.join(';')).join('\r\n');
+    let blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });
+    let url = URL.createObjectURL(blob);
+    let link = document.createElement('a');
+    link.setAttribute('href', url);
     link.setAttribute('download', filename + '.csv');
     document.body.appendChild(link);
     link.click();
