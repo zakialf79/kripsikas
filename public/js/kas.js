@@ -34,6 +34,8 @@ function lanjutFormDebet(metode) {
     document.getElementById('debetTotalUangVisual').value = '';
     document.getElementById('debetKeteranganTambahan').value = '';
     document.getElementById('debetOngkir').value = '';
+    const konsinyasiStatus = document.getElementById('konsinyasiStatus');
+    if (konsinyasiStatus) konsinyasiStatus.value = 'titip';
 
     populateDropdownNama(metode);
 
@@ -128,6 +130,18 @@ function simpanDebet(e) {
     if (ongkir > 0) ketFinal += ` | Ongkir: Rp ${ongkir.toLocaleString('id-ID')}`;
 
     let totalDebet = (qty * harga);
+
+    // LOGIKA BARU KONSINYASI (Cegah uang semu)
+    if (metodePenjualan === 'Konsinyasi') {
+        const statusTitip = document.getElementById('konsinyasiStatus').value;
+        if (statusTitip === 'titip') {
+            totalDebet = 0; // Uang masuk Rp 0
+            ketFinal = ketFinal.replace('[Titip]', '[Mulai Titip]');
+            ketFinal += ` | Potensi Cair: Rp ${(qty * harga).toLocaleString('id-ID')}`;
+        } else {
+            ketFinal = ketFinal.replace('[Titip]', '[Setoran Titip]');
+        }
+    }
 
     globalState.listBukuKas.push({
         id: Date.now(),

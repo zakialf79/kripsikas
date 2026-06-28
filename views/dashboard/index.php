@@ -42,7 +42,7 @@
 <!-- Saldo Kas -->
 <div class="bg-gradient-to-br from-white to-gray-50/50 p-5 rounded-3xl shadow-sm border border-gray-100 text-center relative overflow-hidden card-glow">
     <p class="text-[10px] font-black text-gray-400 uppercase tracking-widest">💰 SALDO KAS SAAT INI</p>
-    <p id="dashSaldoAkhir" class="text-3xl font-black text-amber-600 mt-1 drop-shadow-sm num-transition">Rp 0</p>
+    <p id="dashSaldoAkhir" class="text-3xl font-black text-blue-700 mt-1 drop-shadow-sm num-transition">Rp 0</p>
 </div>
 
 <!-- Kelola Mitra -->
@@ -67,16 +67,16 @@
 <section id="areaCetakBukuKas" class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden p-1">
     <div class="p-4 bg-gray-50/70 border-b border-gray-100 flex justify-between items-center id-anti-cetak">
         <h3 class="text-xs font-black text-gray-700 uppercase tracking-wider">Tabel Catatan Kas</h3>
-        <button type="button" onclick="tutupBukuBulanan()" class="text-[10px] bg-amber-600 text-white px-3 py-1.5 rounded-xl font-bold active:scale-95 cursor-pointer shadow transition-all btn-press">🔒 Tutup Buku</button>
+        <button type="button" onclick="tutupBukuBulanan()" class="text-[10px] bg-yellow-400 text-blue-900 px-3 py-1.5 rounded-xl font-bold active:scale-95 cursor-pointer shadow transition-all btn-press">🔒 Tutup Buku</button>
     </div>
     <div class="hidden show-on-pdf p-4 text-center border-b-2 border-gray-800">
-        <h2 class="text-xl font-black uppercase">Laporan Catatan Buku Kas KrispiKas</h2>
-        <p class="text-xs text-gray-600 mt-0.5">Sistem Pencatatan Finansial Internal Usaha Kerupuk</p>
+        <h2 class="text-xl font-black uppercase">Laporan Buku Kas SIGMA</h2>
+        <p class="text-xs text-gray-600 mt-0.5">Sistem Integrasi Gudang dan Manajemen Keuangan</p>
     </div>
     <div class="overflow-x-auto">
         <table class="w-full text-left border-collapse text-xs">
             <thead>
-                <tr class="bg-amber-50/60 text-amber-900 border-b border-amber-100 font-bold text-[10px] uppercase tracking-wider">
+                <tr class="bg-blue-50 text-blue-900 border-b border-blue-100 font-bold text-[10px] uppercase tracking-wider">
                     <th class="p-3 text-center w-12">Tgl</th>
                     <th class="p-3">Keterangan</th>
                     <th class="p-3 text-right w-20">Debet</th>

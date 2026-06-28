@@ -46,13 +46,22 @@
                 <select id="debetPilihNama" class="w-full p-3 border border-gray-200 rounded-xl bg-white font-semibold text-xs focus:outline-emerald-500"></select>
             </div>
 
-            <div id="blokKonsinyasi" class="hidden p-3.5 bg-gradient-to-br from-blue-50 to-indigo-50/30 rounded-2xl border border-blue-100 space-y-2">
-                <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Varian Pack (Pencatatan)</label>
-                <select id="konsinyasiVarian" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
-                    <option value="Kerupuk 1.000">Kerupuk 1.000</option>
-                    <option value="Kerupuk 2.000">Kerupuk 2.000</option>
-                    <option value="Kerupuk 5.000">Kerupuk 5.000</option>
-                </select>
+            <div id="blokKonsinyasi" class="hidden p-3.5 bg-gradient-to-br from-blue-50 to-indigo-50/30 rounded-2xl border border-blue-100 space-y-3">
+                <div>
+                    <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Status Aktivitas Konsinyasi</label>
+                    <select id="konsinyasiStatus" class="w-full p-2.5 border border-blue-200 rounded-xl bg-white font-bold text-blue-700 text-xs focus:outline-blue-500">
+                        <option value="titip">🚚 Mulai Titip Barang (Debet = Rp 0)</option>
+                        <option value="setor">💰 Tarik Setoran / Laku (Uang Masuk)</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Varian Pack (Pencatatan)</label>
+                    <select id="konsinyasiVarian" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
+                        <option value="Kerupuk 1.000">Kerupuk 1.000</option>
+                        <option value="Kerupuk 2.000">Kerupuk 2.000</option>
+                        <option value="Kerupuk 5.000">Kerupuk 5.000</option>
+                    </select>
+                </div>
             </div>
 
             <div id="blokBayarLangsung" class="hidden p-3.5 bg-gradient-to-br from-emerald-50 to-teal-50/30 rounded-2xl border border-emerald-100 space-y-2">

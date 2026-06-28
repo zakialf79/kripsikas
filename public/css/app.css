@@ -49,7 +49,7 @@
     transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 .card-glow:hover {
-    box-shadow: 0 4px 20px rgba(245, 158, 11, 0.15);
+    box-shadow: 0 4px 20px rgba(11, 76, 161, 0.15);
     transform: translateY(-1px);
 }
 
@@ -73,7 +73,7 @@
     transition: background-color 0.15s ease;
 }
 .table-row-hover:hover {
-    background-color: rgba(245, 158, 11, 0.04);
+    background-color: rgba(11, 76, 161, 0.04);
 }
 
 /* --- Login Page Background Pattern --- */
@@ -168,8 +168,8 @@ html.dark thead tr {
 html.dark tbody tr {
     border-color: #334155 !important;
 }
-html.dark .border-amber-100 { border-color: #475569 !important; }
-html.dark .bg-amber-50\/60 { background-color: #334155 !important; color: #fcd34d !important; }
+html.dark .border-blue-100 { border-color: #475569 !important; }
+html.dark .bg-blue-50 { background-color: #334155 !important; color: #00AEEF !important; }
 
 /* Override card Gudang Stok */
 html.dark .from-indigo-50 { background: #1e293b !important; border-color: #4f46e5 !important; }
@@ -207,9 +207,9 @@ html.dark .modal-content textarea {
 }
 html.dark .modal-content input:focus,
 html.dark .modal-content select:focus {
-    border-color: #f59e0b !important;
+    border-color: #00AEEF !important;
     outline: none !important;
-    box-shadow: 0 0 0 2px rgba(245, 158, 11, 0.3) !important;
+    box-shadow: 0 0 0 2px rgba(0, 174, 239, 0.3) !important;
 }
 html.dark .modal-content label {
     color: #cbd5e1 !important;

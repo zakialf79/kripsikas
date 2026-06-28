@@ -124,12 +124,12 @@ async function downloadPDFData(bulanKunci) {
 
         let htmlContent = `
             <div style="text-align:center; padding-bottom:15px; border-bottom:2px solid #000; margin-bottom:15px;">
-                <h2 style="margin:0; text-transform:uppercase;">Laporan Buku Kas Bulan ${bulanKunci}</h2>
-                <p style="margin:4px 0 0 0; font-size:12px; color:#555;">Arsip Data Finansial — KrispiKas UMKM Digital</p>
+                <h2 style="margin:0; text-transform:uppercase; color:#0B4CA1;">Laporan Buku Kas Bulan ${bulanKunci}</h2>
+                <p style="margin:4px 0 0 0; font-size:12px; color:#555;">SIGMA — Sistem Integrasi Gudang dan Manajemen Keuangan</p>
             </div>
             <table style="width:100%; border-collapse:collapse; font-size:11px;">
                 <thead>
-                    <tr style="background-color:#fef3c7; border-bottom:1px solid #d97706; text-align:left;">
+                    <tr style="background-color:#eff6ff; border-bottom:1px solid #1d4ed8; text-align:left;">
                         <th style="padding:8px; border:1px solid #ddd;">Tgl</th>
                         <th style="padding:8px; border:1px solid #ddd;">Keterangan</th>
                         <th style="padding:8px; border:1px solid #ddd; text-align:right;">Debet (Rp)</th>
@@ -157,7 +157,7 @@ async function downloadPDFData(bulanKunci) {
             </tr>`;
         });
         
-        htmlContent += `<tr style="background-color:#fef3c7; border-top:2px solid #d97706; font-weight:bold;">
+        htmlContent += `<tr style="background-color:#eff6ff; border-top:2px solid #1d4ed8; font-weight:bold;">
             <td colspan="2" style="padding:8px; border:1px solid #ddd; text-align:right;">TOTAL:</td>
             <td style="padding:8px; border:1px solid #ddd; text-align:right; color:green;">${totalDebet.toLocaleString('id-ID')}</td>
             <td style="padding:8px; border:1px solid #ddd; text-align:right; color:red;">${totalKredit.toLocaleString('id-ID')}</td>

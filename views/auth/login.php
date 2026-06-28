@@ -9,21 +9,21 @@
     <link rel="stylesheet" href="public/css/app.css">
 </head>
 <body class="m-0 p-0 overflow-hidden">
-    <div class="fixed inset-0 bg-gradient-to-br from-amber-500 via-amber-600 to-amber-800 z-[100] flex flex-col items-center justify-center p-6 text-white">
+    <div class="fixed inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-700 z-[100] flex flex-col items-center justify-center p-6 text-white">
         
         <div class="w-full max-w-sm text-center space-y-6 bg-white/10 p-8 rounded-3xl backdrop-blur-md shadow-xl border border-white/20">
             <div>
-                <h1 class="text-3xl font-black tracking-tight">KrispiKas 🍘</h1>
-                <p class="text-xs text-amber-100 mt-1">Sistem Pencatatan Usaha Kerupuk Digital</p>
+                <h1 class="text-4xl font-black tracking-tight"><span class="text-white">SIGM</span><span class="text-yellow-400">A</span></h1>
+                <p class="text-xs text-cyan-100 mt-1">Sistem Integrasi Gudang dan Manajemen Keuangan</p>
             </div>
 
             <form id="formLogin" onsubmit="prosesLogin(event)" class="space-y-3 text-gray-800">
                 <input type="password" id="inputSandi" placeholder="Masukkan Sandi..." required 
                     autocomplete="current-password"
-                    class="w-full p-4 rounded-2xl text-center text-xl font-bold tracking-widest bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-amber-400">
+                    class="w-full p-4 rounded-2xl text-center text-xl font-bold tracking-widest bg-white shadow-inner focus:outline-none focus:ring-2 focus:ring-yellow-400">
                 
                 <button type="submit" id="btnLogin" 
-                    class="w-full bg-amber-900 text-white p-4 font-bold rounded-2xl text-lg active:scale-95 transition-transform cursor-pointer shadow-md hover:bg-amber-950 flex justify-center items-center gap-2">
+                    class="w-full bg-yellow-500 text-blue-900 p-4 font-black rounded-2xl text-lg active:scale-95 transition-transform cursor-pointer shadow-md hover:bg-yellow-400 flex justify-center items-center gap-2">
                     <span id="btnLoginText">Masuk Aplikasi ➔</span>
                     <span id="btnLoginSpinner" class="spinner hidden"></span>
                 </button>
@@ -34,7 +34,7 @@
             </p>
         </div>
 
-        <p class="text-amber-200/50 text-[10px] mt-6">KrispiKas v2.0 — UMKM Digital</p>
+        <p class="text-cyan-200/50 text-[10px] mt-6 font-bold tracking-wider">By Unand Transformative</p>
     </div>
 
     <script>
