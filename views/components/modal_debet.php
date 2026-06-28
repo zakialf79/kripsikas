@@ -56,7 +56,7 @@
                 </div>
                 <div>
                     <label class="block text-[10px] font-black text-blue-800 uppercase tracking-wider mb-1">Varian Pack (Pencatatan)</label>
-                    <select id="konsinyasiVarian" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
+                    <select id="konsinyasiVarian" onchange="autoIsiHargaKonsinyasi()" class="w-full p-2.5 border border-gray-200 rounded-xl bg-white font-medium text-xs focus:outline-blue-500">
                         <option value="Kerupuk 1.000">Kerupuk 1.000</option>
                         <option value="Kerupuk 2.000">Kerupuk 2.000</option>
                         <option value="Kerupuk 5.000">Kerupuk 5.000</option>

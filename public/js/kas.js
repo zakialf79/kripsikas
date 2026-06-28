@@ -43,6 +43,7 @@ function lanjutFormDebet(metode) {
         judul.innerText = '🤝 PENDAPATAN KONSINYASI';
         bKonsinyasi.classList.remove('hidden');
         bLangsung.classList.add('hidden');
+        autoIsiHargaKonsinyasi();
     } else {
         judul.innerText = '💵 PEMBAYARAN TUNAI';
         bKonsinyasi.classList.add('hidden');
@@ -72,6 +73,15 @@ function hitungTotalDebet() {
     let harga = cleanRupiah(document.getElementById('debetHargaSatuan').value);
     let total = (qty * harga);
     document.getElementById('debetTotalUangVisual').value = total > 0 ? total.toLocaleString('id-ID') : '';
+}
+
+function autoIsiHargaKonsinyasi() {
+    const varian = document.getElementById('konsinyasiVarian').value;
+    const inputHarga = document.getElementById('debetHargaSatuan');
+    if (varian === 'Kerupuk 1.000') inputHarga.value = '1.000';
+    else if (varian === 'Kerupuk 2.000') inputHarga.value = '2.000';
+    else if (varian === 'Kerupuk 5.000') inputHarga.value = '5.000';
+    hitungTotalDebet();
 }
 
 // ============================================

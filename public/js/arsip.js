@@ -97,20 +97,7 @@ function generateCSV(dataArray, filename) {
 // ============================================
 
 function downloadPDFBulanIni() {
-    const areaCetak = document.getElementById('areaCetakBukuKas');
-    const opsi = {
-        margin: [10, 10, 10, 10],
-        filename: 'Buku_Kas_Bulan_Berjalan.pdf',
-        image: { type: 'jpeg', quality: 0.98 },
-        html2canvas: { scale: 2, useCORS: true, ignoreElements: (el) => el.classList.contains('id-anti-cetak') },
-        jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-    };
-
-    areaCetak.classList.add('p-8');
-    html2pdf().set(opsi).from(areaCetak).save().then(() => {
-        areaCetak.classList.remove('p-8');
-        showToast('PDF berhasil didownload!', '📄');
-    });
+    window.print();
 }
 
 async function downloadPDFData(bulanKunci) {
@@ -118,26 +105,36 @@ async function downloadPDFData(bulanKunci) {
         const res = await fetch(`${API_URL}?action=get_arsip_bulan&bulan=${encodeURIComponent(bulanKunci)}`);
         const targetData = await res.json();
 
-        let divBayangan = document.createElement('div');
-        divBayangan.style.padding = '20px';
-        divBayangan.style.fontFamily = 'sans-serif';
-
         let htmlContent = `
-            <div style="text-align:center; padding-bottom:15px; border-bottom:2px solid #000; margin-bottom:15px;">
-                <h2 style="margin:0; text-transform:uppercase; color:#0B4CA1;">Laporan Buku Kas Bulan ${bulanKunci}</h2>
-                <p style="margin:4px 0 0 0; font-size:12px; color:#555;">SIGMA — Sistem Integrasi Gudang dan Manajemen Keuangan</p>
-            </div>
-            <table style="width:100%; border-collapse:collapse; font-size:11px;">
-                <thead>
-                    <tr style="background-color:#eff6ff; border-bottom:1px solid #1d4ed8; text-align:left;">
-                        <th style="padding:8px; border:1px solid #ddd;">Tgl</th>
-                        <th style="padding:8px; border:1px solid #ddd;">Keterangan</th>
-                        <th style="padding:8px; border:1px solid #ddd; text-align:right;">Debet (Rp)</th>
-                        <th style="padding:8px; border:1px solid #ddd; text-align:right;">Kredit (Rp)</th>
-                        <th style="padding:8px; border:1px solid #ddd; text-align:right;">Saldo (Rp)</th>
-                    </tr>
-                </thead>
-                <tbody>`;
+            <!DOCTYPE html>
+            <html lang="id">
+            <head>
+                <title>Arsip ${bulanKunci}</title>
+                <style>
+                    body { font-family: sans-serif; padding: 20px; }
+                    table { width: 100%; border-collapse: collapse; font-size: 12px; margin-top: 15px; }
+                    th, td { border: 1px solid #ddd; padding: 8px; }
+                    th { background-color: #eff6ff; text-align: left; }
+                    h2 { color: #0B4CA1; margin: 0; text-transform: uppercase; }
+                    p { color: #555; font-size: 12px; margin-top: 5px; }
+                </style>
+            </head>
+            <body onload="setTimeout(() => { window.print(); window.close(); }, 500);">
+                <div style="text-align:center; padding-bottom:15px; border-bottom:2px solid #000;">
+                    <h2>Laporan Buku Kas Bulan ${bulanKunci}</h2>
+                    <p>SIGMA — Sistem Integrasi Gudang dan Manajemen Keuangan</p>
+                </div>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Tgl</th>
+                            <th>Keterangan</th>
+                            <th style="text-align:right;">Debet (Rp)</th>
+                            <th style="text-align:right;">Kredit (Rp)</th>
+                            <th style="text-align:right;">Saldo (Rp)</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
 
         let runningSaldo = 0;
         let totalDebet = 0;
@@ -148,35 +145,32 @@ async function downloadPDFData(bulanKunci) {
             runningSaldo += (dbt - krd);
             totalDebet += dbt;
             totalKredit += krd;
-            htmlContent += `<tr style="border-bottom:1px solid #eee;">
-                <td style="padding:7px; border:1px solid #ddd; text-align:center;">${row.tgl}</td>
-                <td style="padding:7px; border:1px solid #ddd; font-weight:bold;">${row.ket}</td>
-                <td style="padding:7px; border:1px solid #ddd; text-align:right; color:green;">${dbt > 0 ? dbt.toLocaleString('id-ID') : ''}</td>
-                <td style="padding:7px; border:1px solid #ddd; text-align:right; color:red;">${krd > 0 ? krd.toLocaleString('id-ID') : ''}</td>
-                <td style="padding:7px; border:1px solid #ddd; text-align:right; font-weight:bold;">${runningSaldo.toLocaleString('id-ID')}</td>
+            htmlContent += `<tr>
+                <td style="text-align:center;">${row.tgl}</td>
+                <td><strong>${row.ket}</strong></td>
+                <td style="text-align:right; color:green;">${dbt > 0 ? dbt.toLocaleString('id-ID') : ''}</td>
+                <td style="text-align:right; color:red;">${krd > 0 ? krd.toLocaleString('id-ID') : ''}</td>
+                <td style="text-align:right; font-weight:bold;">${runningSaldo.toLocaleString('id-ID')}</td>
             </tr>`;
         });
         
-        htmlContent += `<tr style="background-color:#eff6ff; border-top:2px solid #1d4ed8; font-weight:bold;">
-            <td colspan="2" style="padding:8px; border:1px solid #ddd; text-align:right;">TOTAL:</td>
-            <td style="padding:8px; border:1px solid #ddd; text-align:right; color:green;">${totalDebet.toLocaleString('id-ID')}</td>
-            <td style="padding:8px; border:1px solid #ddd; text-align:right; color:red;">${totalKredit.toLocaleString('id-ID')}</td>
-            <td style="padding:8px; border:1px solid #ddd; text-align:right;">${runningSaldo.toLocaleString('id-ID')}</td>
+        htmlContent += `<tr style="background-color:#eff6ff; font-weight:bold;">
+            <td colspan="2" style="text-align:right;">TOTAL:</td>
+            <td style="text-align:right; color:green;">${totalDebet.toLocaleString('id-ID')}</td>
+            <td style="text-align:right; color:red;">${totalKredit.toLocaleString('id-ID')}</td>
+            <td style="text-align:right;">${runningSaldo.toLocaleString('id-ID')}</td>
         </tr>`;
 
-        htmlContent += '</tbody></table>';
-        divBayangan.innerHTML = htmlContent;
+        htmlContent += '</tbody></table></body></html>';
 
-        const opsi = {
-            margin: 10,
-            filename: `Arsip_Kas_${bulanKunci}.pdf`,
-            image: { type: 'jpeg', quality: 0.98 },
-            html2canvas: { scale: 2 },
-            jsPDF: { unit: 'mm', format: 'a4', orientation: 'portrait' }
-        };
-
-        html2pdf().set(opsi).from(divBayangan).save();
-        showToast(`PDF arsip ${bulanKunci} berhasil didownload!`, '📄');
+        let printWin = window.open('', '_blank');
+        if (printWin) {
+            printWin.document.open();
+            printWin.document.write(htmlContent);
+            printWin.document.close();
+        } else {
+            showToast('Pop-up terblokir! Izinkan pop-up untuk cetak PDF.', '⚠️', 4000);
+        }
     } catch (err) {
         showToast('Gagal membuat PDF arsip!', '❌');
     }
