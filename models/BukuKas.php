@@ -84,4 +84,22 @@ class BukuKas
             ]);
         }
     }
+
+    /**
+     * Ambil histori pendapatan (omset masuk) per bulan.
+     */
+    public function getRevenueHistory(): array
+    {
+        $stmt = $this->db->prepare(
+            "SELECT 
+                COALESCE(nama_bulan_arsip, 'Bulan Ini') AS bulan,
+                SUM(debet) AS pendapatan
+             FROM buku_kas 
+             WHERE debet > 0 AND LOWER(keterangan) NOT LIKE '%sisa saldo%'
+             GROUP BY is_arsip, nama_bulan_arsip
+             ORDER BY MIN(tgl_sort) ASC"
+        );
+        $stmt->execute();
+        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    }
 }

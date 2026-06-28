@@ -29,6 +29,7 @@ class KasController
                 'historiGudang'  => $historiGudang->getRecent(),
                 'arsipBulanList' => $bukuKas->getArsipBulanList(),
                 'akumulasiPakai' => $akumulasi->getLatest(),
+                'revenueHistory' => $bukuKas->getRevenueHistory(),
             ]);
         } catch (Exception $e) {
             http_response_code(500);

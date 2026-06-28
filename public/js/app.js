@@ -16,7 +16,8 @@ let globalState = {
     agenLangsung: [],
     historiGudang: [],
     arsipBulanList: [],
-    akumulasiPakai: { mentah: 0, minyak: 0, gas: 0 }
+    akumulasiPakai: { mentah: 0, minyak: 0, gas: 0 },
+    revenueHistory: []
 };
 
 let arrChartsGlobal = [];
@@ -56,6 +57,7 @@ async function loadDataDariMySQL() {
         globalState.historiGudang  = data.historiGudang || [];
         globalState.arsipBulanList = data.arsipBulanList || [];
         globalState.akumulasiPakai = data.akumulasiPakai || { mentah: 0, minyak: 0, gas: 0 };
+        globalState.revenueHistory = data.revenueHistory || [];
 
         // Update semua visual
         setTanggalInputDefault();

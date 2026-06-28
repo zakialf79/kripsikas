@@ -137,5 +137,69 @@ function bukaStatistikDSS() {
         }
 
         document.getElementById('aiBahanBaku').innerText = textAIBahan;
+
+        // ---- 4. Grafik Trend Pendapatan ----
+        const canvasTrend = document.getElementById('canvasTrendPendapatan');
+        if (canvasTrend && globalState.revenueHistory && globalState.revenueHistory.length > 0) {
+            const ctxTrend = canvasTrend.getContext('2d');
+            
+            const labelsTrend = globalState.revenueHistory.map(r => r.bulan);
+            const dataTrend = globalState.revenueHistory.map(r => parseFloat(r.pendapatan) || 0);
+            
+            const chartTrend = new Chart(ctxTrend, {
+                type: 'line',
+                data: {
+                    labels: labelsTrend,
+                    datasets: [{
+                        label: 'Pendapatan (Rp)',
+                        data: dataTrend,
+                        borderColor: '#3b82f6',
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderWidth: 2,
+                        fill: true,
+                        tension: 0.3,
+                        pointBackgroundColor: '#2563eb',
+                        pointRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    plugins: { legend: { display: false } },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: {
+                                callback: function(value) {
+                                    if (value >= 1000000) return (value / 1000000) + 'Jt';
+                                    if (value >= 1000) return (value / 1000) + 'k';
+                                    return value;
+                                }
+                            }
+                        }
+                    }
+                }
+            });
+            arrChartsGlobal.push(chartTrend);
+            
+            // Analisis AI Trend Pendapatan
+            let textAITrend = 'Data pendapatan belum cukup untuk dianalisis.';
+            if (dataTrend.length > 1) {
+                const last = dataTrend[dataTrend.length - 1];
+                const prev = dataTrend[dataTrend.length - 2];
+                if (last > prev) {
+                    textAITrend = '📈 Bagus! Pendapatan bulan ini mengalami KENAIKAN dibandingkan bulan sebelumnya.';
+                } else if (last < prev) {
+                    textAITrend = '📉 Perhatian: Pendapatan bulan ini MENURUN dari bulan sebelumnya. Gencarkan promosi!';
+                } else {
+                    textAITrend = '➡️ Pendapatan terpantau stabil dibandingkan bulan sebelumnya.';
+                }
+            } else if (dataTrend.length === 1) {
+                textAITrend = '📊 Ini adalah rekaman bulan pertama Anda. Semangat kumpulkan omset!';
+            }
+            document.getElementById('aiTrendPendapatan').innerText = textAITrend;
+        } else if (canvasTrend) {
+            document.getElementById('aiTrendPendapatan').innerText = '📊 Belum ada data pendapatan yang tercatat.';
+        }
     }, 50);
 }

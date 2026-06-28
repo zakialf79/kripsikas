@@ -49,5 +49,16 @@
             </div>
             <div class="bg-blue-50 border-l-4 border-blue-500 p-2.5 rounded-r-lg text-[10px] text-blue-800 font-medium" id="aiBahanBaku"></div>
         </div>
+
+        <hr class="border-gray-100">
+
+        <!-- 4. Trend Pendapatan Bulanan -->
+        <div class="space-y-2">
+            <h4 class="font-black text-xs text-gray-700 uppercase tracking-wider flex items-center gap-1"><span>📊</span> 4. Trend Pendapatan (Bulan ke Bulan)</h4>
+            <div class="bg-gray-50 border border-gray-200 p-2 rounded-2xl shadow-inner relative h-48 w-full">
+                <canvas id="canvasTrendPendapatan"></canvas>
+            </div>
+            <div class="bg-blue-50 border-l-4 border-blue-500 p-2.5 rounded-r-lg text-[10px] text-blue-800 font-medium" id="aiTrendPendapatan"></div>
+        </div>
     </div>
 </div>
