@@ -29,11 +29,11 @@ function lanjutFormDebet(metode) {
     const bLangsung = document.getElementById('blokBayarLangsung');
 
 
-    // Reset form
     document.getElementById('debetQty').value = '';
     document.getElementById('debetHargaSatuan').value = '';
     document.getElementById('debetTotalUangVisual').value = '';
     document.getElementById('debetKeteranganTambahan').value = '';
+    document.getElementById('debetOngkir').value = '';
 
     populateDropdownNama(metode);
 
@@ -90,6 +90,8 @@ function simpanDebet(e) {
     const qty = cleanNumber(document.getElementById('debetQty').value);
     const harga = cleanRupiah(document.getElementById('debetHargaSatuan').value);
     const detail = document.getElementById('debetKeteranganTambahan').value.trim();
+    const ongkirVal = document.getElementById('debetOngkir').value;
+    const ongkir = ongkirVal ? cleanRupiah(ongkirVal) : 0;
 
     if (qty * harga === 0) return alert('Qty dan Harga tidak boleh kosong!');
 
@@ -123,6 +125,7 @@ function simpanDebet(e) {
     let tag = metodePenjualan === 'Konsinyasi' ? '[Titip]' : '[Tunai]';
     let ketFinal = `${tag} ${nama} - ${qty} ${tipeCetak} [${metodeBayar}]`;
     if (detail) ketFinal += ` (${detail})`;
+    if (ongkir > 0) ketFinal += ` | Ongkir: Rp ${ongkir.toLocaleString('id-ID')}`;
 
     let totalDebet = (qty * harga);
 
@@ -143,9 +146,19 @@ function simpanDebet(e) {
 // SIMPAN KREDIT (UANG KELUAR)
 // ============================================
 
-function bukaFormKredit() {
+function bukaFormKredit(kategoriTarget = 'Kulit Mentah') {
     document.getElementById('kreditTanggal').value = new Date().toISOString().split('T')[0];
-    document.getElementById('kreditKategori').value = 'Kulit Mentah';
+    
+    const select = document.getElementById('kreditKategori');
+    let exists = false;
+    for (let i = 0; i < select.options.length; i++) {
+        if (select.options[i].value === kategoriTarget) exists = true;
+    }
+    if (!exists) {
+        select.innerHTML += `<option value="${kategoriTarget}">📦 ${kategoriTarget}</option>`;
+    }
+    
+    document.getElementById('kreditKategori').value = kategoriTarget;
     document.getElementById('kreditVolumeBeli').value = '';
     document.getElementById('kreditKeteranganTambahan').value = '';
     document.getElementById('kreditJumlahUang').value = '';

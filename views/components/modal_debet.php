@@ -86,9 +86,10 @@
                 </div>
             </div>
 
-
-
-            <div class="grid grid-cols-5 gap-3 items-end">
+            <div>
+                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1">Ongkos Kirim / Kurir (Rp) - Opsional</label>
+                <input type="text" id="debetOngkir" placeholder="0 (Kosongkan jika tidak ada)" oninput="formatInputRupiah(this)" class="w-full p-2.5 border border-gray-200 rounded-xl text-xs focus:outline-emerald-500 text-gray-600 font-bold">
+            </div>            <div class="grid grid-cols-5 gap-3 items-end">
                 <div class="col-span-3">
                     <label class="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1">Ket. Tambahan</label>
                     <input type="text" id="debetKeteranganTambahan" class="w-full p-3 border border-gray-200 rounded-xl text-xs focus:outline-emerald-500">

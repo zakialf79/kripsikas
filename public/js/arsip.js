@@ -49,23 +49,35 @@ function generateCSV(dataArray, filename) {
     let totalDebet = 0;
     let totalKredit = 0;
 
-    dataArray.forEach(row => {
+    dataArray.forEach((row, index) => {
         let debet = parseFloat(row.debet) || 0;
         let kredit = parseFloat(row.kredit) || 0;
         runningSaldo += (debet - kredit);
         totalDebet += debet;
         totalKredit += kredit;
 
+        let rowIndex = index + 2; // Baris 1 adalah header, data mulai dari baris 2
+        let formulaSaldo = (rowIndex === 2) 
+            ? `"=C2-D2"` 
+            : `"=E${rowIndex - 1}+C${rowIndex}-D${rowIndex}"`;
+
         csvRows.push([
             `"${row.tgl || ''}"`,
             `"${(row.ket || '').replace(/"/g, '""')}"`,
             debet,
             kredit,
-            runningSaldo
+            formulaSaldo
         ]);
     });
 
-    csvRows.push(['""', '"TOTAL"', totalDebet, totalKredit, runningSaldo]);
+    let totalRowIndex = dataArray.length + 2;
+    csvRows.push([
+        '""', 
+        '"TOTAL"', 
+        `"=SUM(C2:C${totalRowIndex - 1})"`, 
+        `"=SUM(D2:D${totalRowIndex - 1})"`, 
+        `"=E${totalRowIndex - 1}"`
+    ]);
 
     let csvString = '\uFEFF' + csvRows.map(e => e.join(';')).join('\r\n');
     let blob = new Blob([csvString], { type: 'text/csv;charset=utf-8;' });

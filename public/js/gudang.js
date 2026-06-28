@@ -54,6 +54,13 @@ async function tambahJenisBahanBaku() {
 
     globalState.databaseStok[cleanNama] = 0;
     kirimStateKeMySQL(`➕ Tambah Bahan Baku Baru: ${cleanNama}`);
+
+    // Otomatis buka form catat uang keluar
+    updateVisualStok();
+    closeModal('modalGudang');
+    setTimeout(() => {
+        if (typeof bukaFormKredit === 'function') bukaFormKredit(cleanNama);
+    }, 300);
 }
 
 // ============================================
@@ -102,9 +109,10 @@ function updateVisualStok() {
         let satuan = (barang === 'Gas') ? 'Tbg' : 'Kg';
         htmlList += `<div class="flex justify-between items-center bg-gray-50 p-2.5 rounded-xl border border-gray-200">
             <span class="font-semibold text-gray-800">${barang}</span>
-            <div class="flex items-center gap-3">
-                <span class="font-black text-indigo-700">${qty} <span class="text-[9px] text-gray-400 font-normal">${satuan}</span></span>
-                <button type="button" onclick="editManualStok('${barang}')" class="text-[9px] bg-white border border-gray-300 px-2.5 py-1.5 rounded-xl shadow-sm cursor-pointer btn-press">Edit</button>
+            <div class="flex items-center gap-2">
+                <span class="font-black text-indigo-700 w-12 text-right">${qty} <span class="text-[9px] text-gray-400 font-normal">${satuan}</span></span>
+                <button type="button" onclick="closeModal('modalGudang'); setTimeout(() => bukaFormKredit('${barang}'), 300);" class="text-[9px] bg-indigo-600 text-white px-2.5 py-1.5 rounded-xl shadow-sm cursor-pointer btn-press font-bold hover:bg-indigo-700 transition-colors">Beli</button>
+                <button type="button" onclick="editManualStok('${barang}')" class="text-[9px] bg-white text-gray-600 border border-gray-300 px-2.5 py-1.5 rounded-xl shadow-sm cursor-pointer btn-press hover:bg-gray-100 transition-colors">Koreksi</button>
             </div>
         </div>`;
 
