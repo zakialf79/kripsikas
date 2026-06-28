@@ -67,8 +67,11 @@ class KasController
             }
 
             // 2. Simpan log histori gudang (jika ada entri baru)
+            $histori = new HistoriGudang();
+            if (isset($data->clearHistoriGudang) && $data->clearHistoriGudang === true) {
+                $histori->clearAll();
+            }
             if (!empty($data->newLogTeks)) {
-                $histori = new HistoriGudang();
                 $histori->insert($data->newLogTeks);
             }
 

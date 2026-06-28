@@ -72,13 +72,14 @@ async function loadDataDariMySQL() {
 // ============================================
 // KIRIM SINKRONISASI STATE KE SERVER
 // ============================================
-async function kirimStateKeMySQL(newLog = '') {
+async function kirimStateKeMySQL(newLog = '', clearHistori = false) {
     try {
         const payload = {
             databaseStok: globalState.databaseStok,
             listBukuKas: globalState.listBukuKas,
             akumulasiPakai: globalState.akumulasiPakai,
-            newLogTeks: newLog
+            newLogTeks: newLog,
+            clearHistoriGudang: clearHistori
         };
 
         const res = await fetch(`${API_URL}?action=sync_all_state`, {

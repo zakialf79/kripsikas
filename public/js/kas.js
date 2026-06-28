@@ -316,5 +316,5 @@ async function tutupBukuBulanan() {
     globalState.akumulasiPakai = { mentah: 0, minyak: 0, gas: 0 };
     globalState.historiGudang = [];
 
-    kirimStateKeMySQL(`🔒 Sistem: Tutup buku dan pengarsipan untuk periode ${namaBulan}`);
+    kirimStateKeMySQL(`🔒 Sistem: Tutup buku dan pengarsipan untuk periode ${namaBulan}`, true);
 }

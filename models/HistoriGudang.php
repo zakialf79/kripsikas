@@ -36,4 +36,13 @@ class HistoriGudang
         );
         return $stmt->execute([':log_teks' => $logTeks]);
     }
+
+    /**
+     * Hapus semua log (saat tutup buku).
+     */
+    public function clearAll(): bool
+    {
+        $stmt = $this->db->prepare("DELETE FROM histori_gudang");
+        return $stmt->execute();
+    }
 }
