@@ -27,8 +27,32 @@ let arrChartsGlobal = [];
 // ============================================
 document.addEventListener('DOMContentLoaded', function() {
     loadSettings();
+    startClock();
     loadDataDariMySQL();
 });
+
+// ============================================
+// JAM DIGITAL (GMT+7)
+// ============================================
+function startClock() {
+    const clockEl = document.getElementById('liveClock');
+    if (!clockEl) return;
+
+    // Update setiap detik
+    setInterval(() => {
+        const now = new Date();
+        const timeString = new Intl.DateTimeFormat('id-ID', {
+            timeZone: 'Asia/Jakarta',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: false
+        }).format(now);
+        
+        // Memastikan format dipisahkan tanda titik dua, karena terkadang browser beda format locale
+        clockEl.innerText = timeString.replace(/\./g, ':'); 
+    }, 1000);
+}
 
 // ============================================
 // LOAD DATA DARI SERVER (AJAX)
@@ -64,6 +88,8 @@ async function loadDataDariMySQL() {
         renderKelolaAgen();
         updateTabelKas();
         updateVisualStok();
+        
+        cekPengingatHarian();
 
     } catch (err) {
         showToast('Gagal terhubung ke server! Pastikan XAMPP aktif.', '❌', 5000);
@@ -139,6 +165,25 @@ async function prosesLogout() {
         // Ignore error
     }
     window.location.href = 'index.php';
+}
+
+// ============================================
+// PENGINGAT HARIAN
+// ============================================
+function cekPengingatHarian() {
+    const today = new Date().toISOString().split('T')[0];
+    const lastReminder = localStorage.getItem('krispikas_last_reminder');
+    
+    if (lastReminder === today) return; // Sudah diingatkan hari ini
+
+    const adaCatatanHariIni = globalState.listBukuKas.some(row => row.tglSort === today);
+    
+    if (!adaCatatanHariIni) {
+        setTimeout(async () => {
+            await customAlert('Halo Ibu! ☀️ Sepertinya belum ada pencatatan kas atau gudang hari ini. Jangan lupa dicatat ya!', '🔔', 'Oke, Siap!');
+            localStorage.setItem('krispikas_last_reminder', today);
+        }, 1500); // Muncul 1.5 detik setelah web dimuat
+    }
 }
 
 // ============================================

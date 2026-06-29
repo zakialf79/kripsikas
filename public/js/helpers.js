@@ -110,10 +110,36 @@ function resolveConfirm(value) {
     const modal = document.getElementById('modalConfirm');
     modal.classList.replace('flex', 'hidden');
     document.body.style.overflow = 'auto';
+    
+    // Kembalikan format tombol jika tadi dipanggil customAlert
+    document.getElementById('confirmBtnBatal').classList.remove('hidden');
+    document.getElementById('confirmBtnBatal').parentElement.classList.replace('grid-cols-1', 'grid-cols-2');
+
     if (_confirmResolve) {
         _confirmResolve(value);
         _confirmResolve = null;
     }
+}
+
+/**
+ * Custom alert dialog dengan 1 tombol (OK).
+ */
+function customAlert(message, icon = '🔔', okText = 'Oke, Siap!') {
+    return new Promise((resolve) => {
+        _confirmResolve = resolve;
+        document.getElementById('confirmIcon').textContent = icon;
+        document.getElementById('confirmMessage').textContent = message;
+        document.getElementById('confirmBtnOk').textContent = okText;
+        
+        document.getElementById('confirmBtnBatal').classList.add('hidden');
+        document.getElementById('confirmBtnBatal').parentElement.classList.replace('grid-cols-2', 'grid-cols-1');
+        
+        const modal = document.getElementById('modalConfirm');
+        modal.classList.replace('hidden', 'flex');
+        modal.classList.add('entering');
+        document.body.style.overflow = 'hidden';
+        setTimeout(() => modal.classList.remove('entering'), 300);
+    });
 }
 
 /**

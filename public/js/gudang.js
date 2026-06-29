@@ -94,9 +94,17 @@ async function hapusJenisBahanBaku(namaBaku) {
 
 function updateVisualStok() {
     // Update kartu stok dashboard
-    document.getElementById('stokKulitMentah').innerText = globalState.databaseStok['Kulit Mentah'] || 0;
-    document.getElementById('stokMinyak').innerText = globalState.databaseStok['Minyak'] || 0;
-    document.getElementById('stokGas').innerText = globalState.databaseStok['Gas'] || 0;
+    const sMentah = globalState.databaseStok['Kulit Mentah'] || 0;
+    const sMinyak = globalState.databaseStok['Minyak'] || 0;
+    const sGas = globalState.databaseStok['Gas'] || 0;
+
+    document.getElementById('stokKulitMentah').innerText = sMentah;
+    document.getElementById('stokMinyak').innerText = sMinyak;
+    document.getElementById('stokGas').innerText = sGas;
+
+    document.getElementById('stokKulitMentah').className = `text-lg font-black num-transition ${sMentah < 0 ? 'text-red-600' : 'text-indigo-900'}`;
+    document.getElementById('stokMinyak').className = `text-lg font-black num-transition ${sMinyak < 0 ? 'text-red-600' : 'text-teal-900'}`;
+    document.getElementById('stokGas').className = `text-lg font-black num-transition ${sGas < 0 ? 'text-red-600' : 'text-orange-900'}`;
 
     // Update akumulasi pemakaian
     document.getElementById('totalPakaiMentah').innerText = globalState.akumulasiPakai.mentah;
