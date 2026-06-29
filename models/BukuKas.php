@@ -1,6 +1,6 @@
 <?php
 /**
- * KrispiKas - Model Buku Kas
+ * SIGMA - Model Buku Kas
  * 
  * CRUD operations untuk tabel buku_kas.
  */

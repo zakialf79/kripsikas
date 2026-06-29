@@ -83,13 +83,17 @@ async function loadDataDariMySQL() {
         globalState.akumulasiPakai = data.akumulasiPakai || { mentah: 0, minyak: 0, gas: 0 };
         globalState.revenueHistory = data.revenueHistory || [];
 
-        // Update semua visual
         setTanggalInputDefault();
         renderKelolaAgen();
-        updateTabelKas();
-        updateVisualStok();
         
-        cekPengingatHarian();
+        // Cek auto tutup buku sebelum update visual
+        const autoTutupBerjalan = cekAutoTutupBuku();
+        
+        if (!autoTutupBerjalan) {
+            updateTabelKas();
+            updateVisualStok();
+            cekPengingatHarian();
+        }
 
     } catch (err) {
         showToast('Gagal terhubung ke server! Pastikan XAMPP aktif.', '❌', 5000);
@@ -184,6 +188,67 @@ function cekPengingatHarian() {
             localStorage.setItem('krispikas_last_reminder', today);
         }, 1500); // Muncul 1.5 detik setelah web dimuat
     }
+}
+
+// ============================================
+// AUTO-TUTUP BUKU (PERGANTIAN BULAN)
+// ============================================
+function cekAutoTutupBuku() {
+    if (!globalState.listBukuKas || globalState.listBukuKas.length === 0) return false;
+
+    const now = new Date();
+    const currTahun = now.getFullYear();
+    const currBulan = now.getMonth() + 1; // 1-12
+
+    // Karena diurutkan ASC dari backend, array ke-0 adalah catatan tertua yang aktif
+    const catatanTertua = globalState.listBukuKas[0];
+    const tglUtama = new Date(catatanTertua.tglSort);
+    const thnTertua = tglUtama.getFullYear();
+    const blnTertua = tglUtama.getMonth() + 1;
+
+    // Pastikan valid dan berasal dari bulan/tahun sebelumnya
+    if (!isNaN(thnTertua) && (thnTertua < currTahun || (thnTertua === currTahun && blnTertua < currBulan))) {
+        
+        let saldo = 0;
+        globalState.listBukuKas.forEach(i => saldo += (parseInt(i.debet) - parseInt(i.kredit)));
+
+        const namaBulanIndo = ['Januari','Februari','Maret','April','Mei','Juni','Juli','Agustus','September','Oktober','November','Desember'];
+        const namaBulanArsip = `${namaBulanIndo[blnTertua - 1]} ${thnTertua}`;
+
+        let barisArsip = [];
+        globalState.listBukuKas.forEach(row => {
+            row.is_arsip = 1;
+            row.nama_bulan_arsip = namaBulanArsip;
+            barisArsip.push(row);
+        });
+
+        const tglVisualAk = `${now.getDate()}/${now.getMonth() + 1}`;
+        let sisaRow = {
+            id: Date.now(),
+            tglSort: now.toISOString().split('T')[0],
+            tgl: tglVisualAk,
+            ket: `💰 Sisa saldo ${namaBulanArsip}`,
+            debet: saldo > 0 ? saldo : 0,
+            kredit: saldo < 0 ? Math.abs(saldo) : 0
+        };
+
+        let payloadTutupBuku = [...barisArsip, sisaRow];
+        
+        globalState.listBukuKas = payloadTutupBuku;
+        globalState.akumulasiPakai = { mentah: 0, minyak: 0, gas: 0 };
+        globalState.historiGudang = [];
+
+        kirimStateKeMySQL(`🔒 Sistem: Auto-Tutup buku bulan ${namaBulanArsip} selesai.`, true);
+        
+        setTimeout(() => {
+            if (typeof customAlert === 'function') {
+                customAlert(`Halo Ibu! Sistem otomatis melakukan Tutup Buku untuk ${namaBulanArsip} karena sudah memasuki bulan baru. Saldo kas sudah dipindahkan ke tabel hari ini.`, '🤖', 'Terima Kasih');
+            }
+        }, 1500);
+
+        return true;
+    }
+    return false;
 }
 
 // ============================================
