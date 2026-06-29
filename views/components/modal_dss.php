@@ -3,7 +3,7 @@
 <div id="modalDSS" class="fixed inset-0 z-[80] hidden bg-black/60 items-center justify-center p-4 backdrop-blur-sm modal-overlay">
     <div class="bg-white w-full max-w-md rounded-3xl shadow-2xl relative p-5 space-y-5 m-2 max-h-[94vh] overflow-y-auto no-scrollbar modal-content">
         <div class="flex justify-between items-center border-b border-blue-100 pb-2 sticky top-0 bg-white z-10">
-            <h3 class="text-sm font-black text-blue-700 uppercase tracking-wider">📊 Dashboard Analisis KrispiKas</h3>
+            <h3 class="text-sm font-black text-blue-700 uppercase tracking-wider">📊 Dashboard Analisis SIGMA</h3>
             <button type="button" onclick="closeModal('modalDSS')" class="text-gray-400 text-xl font-bold cursor-pointer">✕</button>
         </div>
 

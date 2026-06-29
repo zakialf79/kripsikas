@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="KrispiKas - Login ke sistem pencatatan usaha kerupuk digital.">
-    <title>KrispiKas — Masuk</title>
+    <meta name="description" content="SIGMA - Login ke sistem pencatatan usaha kerupuk digital.">
+    <title>SIGMA — Masuk</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <link rel="stylesheet" href="public/css/app.css">
 </head>
 <body class="m-0 p-0 overflow-hidden">
-    <div class="fixed inset-0 bg-gradient-to-br from-blue-900 via-blue-800 to-cyan-700 z-[100] flex flex-col items-center justify-center p-6 text-white">
+    <div class="fixed inset-0 bg-gradient-to-br from-slate-900 via-slate-800 to-gray-900 z-[100] flex flex-col items-center justify-center p-6 text-white">
         
         <div class="w-full max-w-sm text-center space-y-6 bg-white/10 p-8 rounded-3xl backdrop-blur-md shadow-xl border border-white/20">
             <div>
@@ -26,7 +26,6 @@
                 <button type="submit" id="btnLogin" 
                     class="w-full bg-yellow-500 text-blue-900 p-4 font-black rounded-2xl text-lg active:scale-95 transition-transform cursor-pointer shadow-md hover:bg-yellow-400 flex justify-center items-center gap-2">
                     <span id="btnLoginText">Masuk Aplikasi ➔</span>
-                    <span id="btnLoginSpinner" class="spinner hidden"></span>
                 </button>
             </form>
 
@@ -44,12 +43,10 @@
 
             const password = document.getElementById('inputSandi').value;
             const btnText = document.getElementById('btnLoginText');
-            const btnSpinner = document.getElementById('btnLoginSpinner');
             const pesanSalah = document.getElementById('pesanSalah');
 
             // Show loading
             btnText.textContent = 'Memproses...';
-            btnSpinner.classList.remove('hidden');
             pesanSalah.classList.add('hidden');
 
             try {
@@ -68,13 +65,11 @@
                     pesanSalah.classList.remove('hidden');
                     pesanSalah.textContent = '⚠️ ' + (data.message || 'Sandi salah, coba lagi.');
                     btnText.textContent = 'Masuk Aplikasi ➔';
-                    btnSpinner.classList.add('hidden');
                 }
             } catch (err) {
                 pesanSalah.classList.remove('hidden');
                 pesanSalah.textContent = '⚠️ Gagal terhubung ke server. Pastikan XAMPP aktif.';
                 btnText.textContent = 'Masuk Aplikasi ➔';
-                btnSpinner.classList.add('hidden');
             }
         }
     </script>
