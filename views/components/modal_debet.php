@@ -14,6 +14,9 @@
             <button type="button" onclick="lanjutFormDebet('Pembayaran Tunai')" class="w-full bg-gradient-to-r from-emerald-50 to-emerald-100/50 border border-emerald-200 p-4 rounded-2xl text-left cursor-pointer active:scale-95 transition-transform btn-press">
                 <p class="font-black text-emerald-800 text-base">💵 Pembayaran Tunai</p>
             </button>
+            <button type="button" onclick="inputSisaSaldo()" class="w-full bg-gradient-to-r from-amber-50 to-amber-100/50 border border-amber-200 p-4 rounded-2xl text-left cursor-pointer active:scale-95 transition-transform btn-press">
+                <p class="font-black text-amber-800 text-base">💰 Sisa Saldo / Modal Awal</p>
+            </button>
         </div>
     </div>
 </div>

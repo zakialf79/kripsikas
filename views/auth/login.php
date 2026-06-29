@@ -26,6 +26,7 @@
                 <button type="submit" id="btnLogin" 
                     class="w-full bg-yellow-500 text-blue-900 p-4 font-black rounded-2xl text-lg active:scale-95 transition-transform cursor-pointer shadow-md hover:bg-yellow-400 flex justify-center items-center gap-2">
                     <span id="btnLoginText">Masuk Aplikasi ➔</span>
+                    <span id="btnLoginSpinner" class="spinner hidden"></span>
                 </button>
             </form>
 
@@ -43,10 +44,12 @@
 
             const password = document.getElementById('inputSandi').value;
             const btnText = document.getElementById('btnLoginText');
+            const btnSpinner = document.getElementById('btnLoginSpinner');
             const pesanSalah = document.getElementById('pesanSalah');
 
             // Show loading
             btnText.textContent = 'Memproses...';
+            btnSpinner.classList.remove('hidden');
             pesanSalah.classList.add('hidden');
 
             try {
@@ -65,11 +68,13 @@
                     pesanSalah.classList.remove('hidden');
                     pesanSalah.textContent = '⚠️ ' + (data.message || 'Sandi salah, coba lagi.');
                     btnText.textContent = 'Masuk Aplikasi ➔';
+                    btnSpinner.classList.add('hidden');
                 }
             } catch (err) {
                 pesanSalah.classList.remove('hidden');
                 pesanSalah.textContent = '⚠️ Gagal terhubung ke server. Pastikan XAMPP aktif.';
                 btnText.textContent = 'Masuk Aplikasi ➔';
+                btnSpinner.classList.add('hidden');
             }
         }
     </script>

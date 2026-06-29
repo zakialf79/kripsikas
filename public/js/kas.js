@@ -12,6 +12,30 @@ function openPilihanUangMasuk() {
     openModal('modalPilihanUangMasuk');
 }
 
+async function inputSisaSaldo() {
+    closeModal('modalPilihanUangMasuk');
+    const nominal = await customPrompt('Masukkan nominal Sisa Saldo / Modal Awal (Rp):');
+    if (!nominal) return;
+    
+    const cleanNominal = cleanRupiah(nominal);
+    if (cleanNominal <= 0) return;
+    
+    const d = new Date();
+    const tglVisual = `${d.getDate()}/${d.getMonth() + 1}`;
+    const tglRaw = d.toISOString().split('T')[0];
+
+    globalState.listBukuKas.push({
+        id: Date.now(),
+        tglSort: tglRaw,
+        tgl: tglVisual,
+        ket: `💰 Sisa Saldo / Modal Awal`,
+        debet: cleanNominal,
+        kredit: 0
+    });
+
+    kirimStateKeMySQL('💰 Input manual Sisa Saldo / Modal Awal');
+}
+
 function populateDropdownNama(metode) {
     let list = metode === 'Konsinyasi' ? globalState.agenKonsinyasi : globalState.agenLangsung;
     let html = '';
