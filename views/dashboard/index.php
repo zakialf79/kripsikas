@@ -67,7 +67,7 @@
 <section id="areaCetakBukuKas" class="bg-white rounded-3xl shadow-sm border border-gray-100 overflow-hidden p-1">
     <div class="p-4 bg-gray-50/70 border-b border-gray-100 flex justify-between items-center id-anti-cetak">
         <h3 class="text-xs font-black text-gray-700 uppercase tracking-wider">Tabel Arus Kas</h3>
-        <button type="button" onclick="tutupBukuBulanan()" class="text-[10px] bg-yellow-400 text-blue-900 px-3 py-1.5 rounded-xl font-bold active:scale-95 cursor-pointer shadow transition-all btn-press">🔒 Tutup Buku</button>
+        <button type="button" onclick="tutupBukuBulanan()" class="text-[10px] bg-red-600 hover:bg-red-700 text-white px-3 py-1.5 rounded-xl font-bold active:scale-95 cursor-pointer shadow transition-all btn-press">⚠️ Tutup Buku</button>
     </div>
     <div class="hidden show-on-pdf p-4 text-center border-b-2 border-gray-800">
         <h2 class="text-xl font-black uppercase">Laporan Buku Kas SIGMA</h2>

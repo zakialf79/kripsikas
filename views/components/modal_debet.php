@@ -53,6 +53,7 @@
                         <option value="Kerupuk 1.000">Kerupuk 1.000</option>
                         <option value="Kerupuk 2.000">Kerupuk 2.000</option>
                         <option value="Kerupuk 5.000">Kerupuk 5.000</option>
+                        <option value="Kulit Mentah">Kulit Mentah (Kg)</option>
                     </select>
                 </div>
             </div>
@@ -80,7 +81,7 @@
             <div class="grid grid-cols-2 gap-3 p-3.5 bg-gray-50 rounded-2xl border border-gray-200">
                 <div>
                     <label class="block text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1 text-center">Jumlah (Qty)</label>
-                    <input type="number" id="debetQty" placeholder="0" required step="any" oninput="hitungTotalDebet()" class="w-full p-2.5 border border-gray-300 rounded-xl text-base font-black text-center focus:outline-amber-500">
+                    <input type="number" id="debetQty" placeholder="Misal: 10" required step="any" oninput="hitungTotalDebet()" class="w-full p-2.5 border border-gray-300 rounded-xl text-base font-black text-center focus:outline-amber-500">
                 </div>
                 <div>
                     <label class="block text-[10px] font-black text-gray-500 uppercase tracking-wider mb-1">Harga Satuan (Rp)</label>
@@ -93,15 +94,15 @@
                 <input type="text" id="debetOngkir" placeholder="0 (Kosongkan jika tidak ada)" oninput="formatInputRupiah(this)" class="w-full p-2.5 border border-gray-200 rounded-xl text-xs focus:outline-emerald-500 text-gray-600 font-bold">
             </div>            <div class="grid grid-cols-5 gap-3 items-end">
                 <div class="col-span-3">
-                    <label class="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1">Ket. Tambahan</label>
-                    <input type="text" id="debetKeteranganTambahan" class="w-full p-3 border border-gray-200 rounded-xl text-xs focus:outline-emerald-500">
+                    <label class="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1">Ket. Tambahan <span class="text-[8px] font-normal lowercase">(opsional)</span></label>
+                    <input type="text" id="debetKeteranganTambahan" placeholder="Contoh: Titip ke warung / Nama kurir" class="w-full p-3 border border-gray-200 rounded-xl text-xs focus:outline-emerald-500">
                 </div>
                 <div class="col-span-2">
                     <label class="block text-[10px] font-black text-emerald-800 uppercase tracking-wider mb-1 text-center">Total (Rp)</label>
                     <input type="text" id="debetTotalUangVisual" readonly class="w-full p-3 bg-gray-100 border-2 border-emerald-500 rounded-xl font-black text-emerald-700 text-sm text-center">
                 </div>
             </div>
-            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-4 font-bold rounded-2xl shadow-md cursor-pointer transition-all text-base shrink-0 btn-press">SIMPAN TRANSAKSI MASUK</button>
+            <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white p-4 font-bold rounded-2xl shadow-md cursor-pointer transition-all text-base shrink-0 btn-press">💾 SIMPAN TRANSAKSI MASUK</button>
         </form>
     </div>
 </div>

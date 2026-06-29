@@ -27,7 +27,7 @@
             <div class="p-4 bg-red-50 rounded-2xl border border-red-100">
                 <label class="block text-[10px] font-black text-red-800 uppercase tracking-wider mb-1">Volume Dibeli (Masuk Gudang)</label>
                 <div class="flex gap-2 items-center">
-                    <input type="number" id="kreditVolumeBeli" placeholder="0" step="any" class="flex-1 p-2.5 border border-gray-200 bg-white rounded-xl text-xs font-bold text-center focus:outline-red-500">
+                    <input type="number" id="kreditVolumeBeli" placeholder="Misal: 5" step="any" class="flex-1 p-2.5 border border-gray-200 bg-white rounded-xl text-xs font-bold text-center focus:outline-red-500">
                     <select id="kreditSatuanBeli" class="p-2.5 border border-gray-200 rounded-xl text-xs font-bold text-gray-600 bg-white focus:outline-red-500">
                         <option value="Kg">Kg</option>
                         <option value="Tabung">Tabung</option>
@@ -39,12 +39,15 @@
                 </div>
             </div>
 
-            <input type="text" id="kreditKeteranganTambahan" placeholder="Tulis keterangan tambahan belanja..." class="w-full p-3 border border-gray-200 rounded-xl text-xs focus:outline-red-500">
+            <div>
+                <label class="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1">Ket. Tambahan <span class="text-[8px] font-normal lowercase">(opsional)</span></label>
+                <input type="text" id="kreditKeteranganTambahan" placeholder="Contoh: Beli di pasar induk" class="w-full p-3 border border-gray-200 rounded-xl text-xs focus:outline-red-500">
+            </div>
             <div>
                 <label class="block text-[10px] font-black text-gray-400 uppercase tracking-wider mb-1">Jumlah Uang Keluar (Rp)</label>
                 <input type="text" id="kreditJumlahUang" placeholder="0" required oninput="formatInputRupiah(this)" class="w-full p-3 border-2 border-red-500 rounded-xl font-black text-red-700 text-xl text-center tracking-widest focus:outline-none">
             </div>
-            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white p-3.5 font-bold rounded-xl shadow-md cursor-pointer transition-all text-base btn-press">SIMPAN TRANSAKSI KELUAR</button>
+            <button type="submit" class="w-full bg-red-600 hover:bg-red-700 text-white p-3.5 font-bold rounded-xl shadow-md cursor-pointer transition-all text-base btn-press">💾 SIMPAN TRANSAKSI KELUAR</button>
         </form>
     </div>
 </div>

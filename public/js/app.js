@@ -130,6 +130,9 @@ function setTanggalInputDefault() {
 // LOGOUT
 // ============================================
 async function prosesLogout() {
+    const ok = await customConfirm('Apakah Anda yakin ingin keluar dari aplikasi?', '🚪', 'Ya, Keluar');
+    if (!ok) return;
+
     try {
         await fetch(`${API_URL}?action=logout`);
     } catch (e) {

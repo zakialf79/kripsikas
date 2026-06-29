@@ -79,6 +79,7 @@ function autoIsiHargaKonsinyasi() {
     if (varian === 'Kerupuk 1.000') inputHarga.value = '1.000';
     else if (varian === 'Kerupuk 2.000') inputHarga.value = '2.000';
     else if (varian === 'Kerupuk 5.000') inputHarga.value = '5.000';
+    else if (varian === 'Kulit Mentah') inputHarga.value = ''; // Diisi manual karena harga kulit bisa fluktuatif
     hitungTotalDebet();
 }
 
@@ -110,7 +111,9 @@ function simpanDebet(e) {
 
     if (metodePenjualan === 'Konsinyasi') {
         stokTarget = document.getElementById('konsinyasiVarian').value;
-        if (stokTarget === 'Kerupuk 5.000') {
+        if (stokTarget === 'Kulit Mentah') {
+            tipeCetak = 'Kulit Mentah (Kg)';
+        } else if (stokTarget === 'Kerupuk 5.000') {
             tipeCetak = `${stokTarget} (Pcs)`;
         } else {
             tipeCetak = `${stokTarget} (Pack)`;

@@ -50,6 +50,16 @@ class GudangStok
      */
     public function syncAll(object $stokData): void
     {
+        $validKeys = array_keys(get_object_vars($stokData));
+
+        if (!empty($validKeys)) {
+            $placeholders = implode(',', array_fill(0, count($validKeys), '?'));
+            $stmt = $this->db->prepare("DELETE FROM gudang_stok WHERE nama_bahan NOT IN ($placeholders)");
+            $stmt->execute($validKeys);
+        } else {
+            $this->db->exec("DELETE FROM gudang_stok");
+        }
+
         foreach ($stokData as $bahan => $qty) {
             $this->upsert($bahan, (float) $qty);
         }

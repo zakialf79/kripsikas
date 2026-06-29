@@ -58,9 +58,9 @@ function cleanRupiah(str) {
  * Tampilkan toast notification.
  * @param {string} message - Pesan yang ditampilkan
  * @param {string} icon - Emoji icon (default: ✅)
- * @param {number} duration - Durasi tampil dalam ms (default: 2500)
+ * @param {number} duration - Durasi tampil dalam ms (default: 5000)
  */
-function showToast(message, icon = '✅', duration = 2500) {
+function showToast(message, icon = '✅', duration = 5000) {
     const toast = document.getElementById('toastContainer');
     const toastMsg = document.getElementById('toastMessage');
     const toastIcon = document.getElementById('toastIcon');

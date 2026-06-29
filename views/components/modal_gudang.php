@@ -24,7 +24,7 @@
                         <input type="number" id="prodGasKeluar" placeholder="Tbg" step="any" class="w-full p-2 border border-indigo-200 rounded-xl bg-white text-xs font-bold text-center focus:outline-indigo-500">
                     </div>
                 </div>
-                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 text-xs font-black rounded-xl cursor-pointer shadow transition-all tracking-wider uppercase btn-press">SIMPAN PEMAKAIAN BAHAN</button>
+                <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white p-2.5 text-xs font-black rounded-xl cursor-pointer shadow transition-all tracking-wider uppercase btn-press">💾 SIMPAN PEMAKAIAN BAHAN</button>
             </form>
 
             <!-- Akumulasi Pemakaian Bulanan -->
